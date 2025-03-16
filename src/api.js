@@ -4,6 +4,8 @@ const API_BASE_URL = "http://127.0.0.1:8000/api"; // ✅ Ensure this matches Dja
 
 export const getEcsMapping = async (logField) => {
     try {
+        const token = localStorage.getItem("token"); // ✅ Retrieve JWT token
+
         // Ensure logField is always an array
         const logFieldsArray = Array.isArray(logField) ? logField : [logField];
 
@@ -11,7 +13,10 @@ export const getEcsMapping = async (logField) => {
         const response = await axios.post(`${API_BASE_URL}/mappings/ecs/`, {
             log_field: logFieldsArray,  // ✅ Ensure correct field name
         }, {
-            headers: { "Content-Type": "application/json" } // ✅ Explicitly set JSON headers
+            headers: {
+                "Content-Type": "application/json", // ✅ Explicitly set JSON headers
+                Authorization: `Bearer ${token}`, // ✅ Include JWT token
+            }
         });
         // Convert backend response to an array of objects
         const formattedResponse = Object.entries(response.data).map(([key, value]) =>({
