@@ -13,6 +13,7 @@ const Login = () => {
         try {
             const res = await axios.post('http://localhost:8000/api/token/', { username, password });
             localStorage.setItem('token', res.data.access);
+            localStorage.setItem('refresh_token', res.data.refresh);
             navigate('/mapping');
         } catch (error) {
             console.error('Login error:', error);

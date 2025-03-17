@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./services/axios.js";
 
 const API_BASE_URL = "http://127.0.0.1:8000/api"; // ✅ Ensure this matches Django backend
 
